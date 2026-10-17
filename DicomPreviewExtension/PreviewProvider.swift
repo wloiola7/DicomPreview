@@ -6,36 +6,18 @@ class PreviewProvider: QLPreviewProvider, QLPreviewingController {
      Use a QLPreviewProvider to provide data-based previews.
      */
 
-    func providePreview(for request: QLFilePreviewRequest) async throws -> QLPreviewReply {
-        // Parse DICOM file
-        let parseResult: DicomParser.ParseResult
+     func providePreview(for request: QLFilePreviewRequest) async throws -> QLPreviewReply {
+         let html = """
+         <!DOCTYPE html>
+         <html>
+         <head><meta charset="utf-8"><title>DICOM Preview Disabled</title></head>
+         <body><p>All DICOM preview functionality is currently disabled.</p></body>
+         </html>
+         """
+         let data = Data(html.utf8)
 
-        do {
-            parseResult = try DicomParser.parseFile(at: request.fileURL)
-        } catch {
-            // Return error HTML on failure
-            let errorHTML = HTMLGenerator.generateErrorHTML(error: error)
-            let data = Data(errorHTML.utf8)
-
-            return QLPreviewReply(dataOfContentType: .html, contentSize: CGSize(width: 800, height: 600)) { _ in
-                return data
-            }
-        }
-
-        // Determine content size based on whether we have an image
-        let contentSize: CGSize
-        if !parseResult.previewImageData.isEmpty {
-            contentSize = CGSize(width: 800, height: 800)  // Larger size for images
-        } else {
-            contentSize = CGSize(width: 800, height: 600)  // Smaller size for text-only
-        }
-
-        // Generate full HTML document
-        let html = HTMLGenerator.generateFullHTML(parseResult: parseResult)
-        let data = Data(html.utf8)
-
-        return QLPreviewReply(dataOfContentType: .html, contentSize: contentSize) { _ in
-            return data
-        }
-    }
+         return QLPreviewReply(dataOfContentType: .html, contentSize: CGSize(width: 800, height: 200)) { _ in
+             return data
+         }
+     }
 }

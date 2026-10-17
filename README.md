@@ -1,6 +1,6 @@
 # DICOM QuickLook Preview
 
-A macOS QuickLook extension for previewing DICOM (Digital Imaging and Communications in Medicine) files directly in Finder. This application uses Rust for fast and efficient DICOM parsing, displaying the DICOM attributes in a well-formatted table and a preview image if the file contains PixelData. This tool is meant to assist with introspecting DICOM files on disk for engineering and R&D usage.
+A macOS application for DICOM files. **All DICOM preview functionality is currently disabled.** The app displays this status, and its Quick Look extension does not read or parse selected files.
 
 ⚠️ WARNING: This preview tool is not intended for clinical use! ⚠️
 
@@ -9,13 +9,9 @@ The images reproduced in the preview may not render like they would in software 
 
 ![DICOM Preview Screenshot](docs/images/preview.png)
 
-## Features
+## Status
 
-- 🔍 Quick preview of DICOM files using spacebar in Finder
-- 📊 View all DICOM attributes in a clean, organized table format
-- ⚡️ Fast performance with Rust-based parsing via dicom-rs
-- 🎯 Support for standard DICOM file formats
-- 🔒 Privacy-focused: all processing done locally on your machine
+The application and Quick Look extension are inactive. Opening the app shows a disabled notice; requesting a Quick Look preview returns a disabled notice without accessing the file.
 
 ## Requirements
 
@@ -57,14 +53,7 @@ The images reproduced in the preview may not render like they would in software 
 
 ## Usage
 
-1. Install the application as described above
-2. In Finder, select any DICOM file (common extensions: .dcm, .dicom, .dic)
-3. Press spacebar to activate QuickLook
-4. The preview will show a table with:
-   - Tag ID
-   - Element Name
-   - Value Representation (VR)
-   - Element Value
+DICOM preview is disabled and cannot be used.
 
 ## Project Structure
 
